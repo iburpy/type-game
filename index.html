@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Typing Speed & Accuracy Test</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="theme-switch">
+        <label class="switch">
+          <input type="checkbox" id="theme-toggle" />
+          <span class="slider round"></span>
+        </label>
+        <span style="margin-left: 10px; margin-top: 8px" class="theme-label"
+          >Toggle dark mode</span
+        >
+      </div>
+      <div class="content-box">
+        <div class="typing-text">
+          <p></p>
+        </div>
+        <div class="top-controls">
+          <div class="completion-percentage">
+            <span class="percentage" id="completion">0%</span>
+          </div>
+          <select class="time-selector">
+            <option>Select time</option>
+            <option value="120">120s</option>
+            <option value="100">100s</option>
+            <option value="90">90s</option>
+            <option value="80">80s</option>
+            <option value="70">70s</option>
+            <!-- <option value="60">60s</option>
+            <option value="50">50s</option>
+            <option value="40">40s</option>
+            <option value="30">30s</option>
+            <option value="20">20s</option>-->
+            <option value="10">10s</option>
+          </select>
+          <input
+            type="text"
+            title="Type Here"
+            placeholder="Select time, click here and type"
+            class="input-field"
+          />
+          <div class="score-container">
+            <img
+              src="https://icons.veryicon.com/png/o/miscellaneous/phoenix-project-icon-library/score-10.png"
+              alt="Score Icon"
+              class="icon"
+            />
+            <p>Score&nbsp;<span id="score">0</span></p>
+          </div>
+        </div>
+
+        <div class="content">
+          <ul class="result-details">
+            <li class="time">
+              <p>
+                <span><b>0</b>&nbsp;s</span>
+              </p>
+              <!-- <p>remaining</p> -->
+            </li>
+            <li class="mistake">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/5219/5219070.png"
+                alt="Mistakes Icon"
+                class="icon"
+              />
+              <p>Mistakes&nbsp;<span>0</span></p>
+            </li>
+            <li class="accuracy">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3800/3800899.png"
+                alt="Accuracy Icon"
+                class="icon"
+              />
+              <p>Accuracy&nbsp;<span>0%</span></p>
+            </li>
+            <li class="wpm">
+              <abbr title="Words per minute">
+                <p>WPM&nbsp;<span>0</span></p>
+              </abbr>
+            </li>
+            <li class="cpm">
+              <abbr title="Characters per minute">
+                <p>CPM&nbsp;<span>0</span></p>
+              </abbr>
+            </li>
+          </ul>
+          <button>Try&nbsp;Again</button>
+        </div>
+      </div>
+    </div>
+    <div class="alert-card hidden">
+      <div class="alert-content">
+        <h2>Results</h2>
+        <p>
+          <img
+            src="https://icons.veryicon.com/png/o/miscellaneous/phoenix-project-icon-library/score-10.png"
+            alt="Score Icon"
+            class="icon"
+          />
+          Score:&nbsp;
+          <span id="final-score">0</span>
+        </p>
+        <p>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/5219/5219070.png"
+            alt="Mistakes Icon"
+            class="icon"
+          />
+          Mistakes:&nbsp;
+          <span id="final-mistakes">0</span>
+        </p>
+        <p>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3800/3800899.png"
+            alt="Accuracy Icon"
+            class="icon"
+          />
+          Accuracy:&nbsp;
+          <span id="final-accuracy">0%</span>
+        </p>
+        <p>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/109/109613.png"
+            alt="Time Left"
+            class="icon"
+          /><span id="final-time"></span>&nbsp;seconds&nbsp;remaining
+        </p>
+        <p>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/227/227451.png"
+            alt="Completion Icon"
+            class="icon"
+          /><span id="final-completion">&nbsp;</span>
+        </p>
+        <p>Words&nbsp;per&nbsp;minute:&nbsp;<span id="final-wpm">0</span></p>
+        <p>
+          Characters&nbsp;per&nbsp;minute:&nbsp;<span id="final-cpm">0</span>
+        </p>
+        <button id="close-alert">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/9974/9974058.png"
+            alt="Close"
+            class="icon"
+          />
+        </button>
+      </div>
+    </div>
+
+    <script src="js/paragraphs.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
