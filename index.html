@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,35 +9,34 @@
   <body>
     <div class="wrapper">
       <div class="theme-switch">
-        <label class="switch">
-          <input type="checkbox" id="theme-toggle" />
-          <span class="slider round"></span>
-        </label>
-        <span style="margin-left: 10px; margin-top: 8px" class="theme-label"
-          >Toggle dark mode</span
-        >
+        <div class="toggle-container">
+          <label class="switch">
+            <input type="checkbox" id="theme-toggle" />
+            <span class="slider round"></span>
+          </label>
+          <span class="theme-label">Toggle dark mode</span>
+          <div id="google_translate_element"></div>
+          <span class="paragraph-instructions"
+            >Press Esc to reset time and paragraph</span
+          >
+        </div>
       </div>
       <div class="content-box">
         <div class="typing-text">
-          <p></p>
+          <p translate="no"></p>
         </div>
         <div class="top-controls">
           <div class="completion-percentage">
             <span class="percentage" id="completion">0%</span>
           </div>
           <select class="time-selector">
-            <option>Select time</option>
-            <option value="120">120s</option>
-            <option value="100">100s</option>
-            <option value="90">90s</option>
-            <option value="80">80s</option>
-            <option value="70">70s</option>
-            <!-- <option value="60">60s</option>
-            <option value="50">50s</option>
-            <option value="40">40s</option>
-            <option value="30">30s</option>
-            <option value="20">20s</option>-->
-            <option value="10">10s</option>
+            <option value="">Select Time Length</option>
+            <option value="120">120 sec.</option>
+            <option value="100">100 sec.</option>
+            <option value="90">90 sec.</option>
+            <option value="80">80 sec.</option>
+            <option value="70">70 sec.</option>
+            <!-- <option value="3">3 sec.</option> For testing purpose -->
           </select>
           <input
             type="text"
@@ -46,48 +45,31 @@
             class="input-field"
           />
           <div class="score-container">
-            <img
-              src="https://icons.veryicon.com/png/o/miscellaneous/phoenix-project-icon-library/score-10.png"
-              alt="Score Icon"
-              class="icon"
-            />
             <p>Score&nbsp;<span id="score">0</span></p>
           </div>
         </div>
-
         <div class="content">
           <ul class="result-details">
             <li class="time">
               <p>
-                <span><b>0</b>&nbsp;s</span>
+                <span><b>0</b>&nbsp;sec.</span>
               </p>
-              <!-- <p>remaining</p> -->
             </li>
             <li class="mistake">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/5219/5219070.png"
-                alt="Mistakes Icon"
-                class="icon"
-              />
               <p>Mistakes&nbsp;<span>0</span></p>
             </li>
             <li class="accuracy">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/3800/3800899.png"
-                alt="Accuracy Icon"
-                class="icon"
-              />
               <p>Accuracy&nbsp;<span>0%</span></p>
             </li>
             <li class="wpm">
-              <abbr title="Words per minute">
-                <p>WPM&nbsp;<span>0</span></p>
-              </abbr>
+              <abbr title="Words per minute"
+                ><p>WPM&nbsp;<span>0</span></p></abbr
+              >
             </li>
             <li class="cpm">
-              <abbr title="Characters per minute">
-                <p>CPM&nbsp;<span>0</span></p>
-              </abbr>
+              <abbr title="Characters per minute"
+                ><p>CPM&nbsp;<span>0</span></p></abbr
+              >
             </li>
           </ul>
           <button>Try&nbsp;Again</button>
@@ -97,61 +79,69 @@
     <div class="alert-card hidden draggable">
       <div class="alert-content">
         <h2>Results</h2>
+        <p><b>Score</b>&emsp;&nbsp;<span id="final-score">0</span></p>
+        <p><b>Mistakes</b>&emsp;&nbsp;<span id="final-mistakes">0</span></p>
+        <p><b>Accuracy</b>&emsp;&nbsp;<span id="final-accuracy">0%</span></p>
         <p>
-          <img
-            src="https://icons.veryicon.com/png/o/miscellaneous/phoenix-project-icon-library/score-10.png"
-            alt="Score Icon"
-            class="icon"
-          />
-          Score:&nbsp;
-          <span id="final-score">0</span>
+          <b>Time&nbsp;Left</b>&emsp;<span id="final-time">&nbsp;sec.</span>
         </p>
         <p>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/5219/5219070.png"
-            alt="Mistakes Icon"
-            class="icon"
-          />
-          Mistakes:&nbsp;
-          <span id="final-mistakes">0</span>
+          <b>Completion</b>&emsp;&nbsp;<span id="final-completion">&nbsp;</span>
         </p>
         <p>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/3800/3800899.png"
-            alt="Accuracy Icon"
-            class="icon"
-          />
-          Accuracy:&nbsp;
-          <span id="final-accuracy">0%</span>
+          <b>Words&nbsp;per&nbsp;minute</b>&emsp;&nbsp;<span id="final-wpm"
+            >0</span
+          >
         </p>
         <p>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/109/109613.png"
-            alt="Time Left"
-            class="icon"
-          /><span id="final-time"></span>&nbsp;seconds&nbsp;remaining
+          <b>Characters&nbsp;per&nbsp;minute</b>&emsp;&nbsp;<span id="final-cpm"
+            >0</span
+          >
         </p>
-        <p>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/227/227451.png"
-            alt="Completion Icon"
-            class="icon"
-          /><span id="final-completion">&nbsp;</span>
-        </p>
-        <p>Words&nbsp;per&nbsp;minute:&nbsp;<span id="final-wpm">0</span></p>
-        <p>
-          Characters&nbsp;per&nbsp;minute:&nbsp;<span id="final-cpm">0</span>
-        </p>
-        <button id="close-alert">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/9974/9974058.png"
-            alt="Close"
-            class="icon"
-          />
-        </button>
+        <button id="close-alert"><b>Close</b></button>
       </div>
     </div>
 
+    <!-- Nueva Alerta -->
+    <div class="info-alert hidden">
+      <div class="alert-content">
+        <h2>Notice</h2>
+        <p>
+          This is intended as a typing accuracy and speed test, so backspace is
+          not allowed and will decrease your score by 1. You can switch between
+          paragraphs by pressing the Esc key; doing this will also reset time.
+        </p>
+        <button id="close-info-alert"><b>Close Alert</b></button>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: 'es,de,ja,it',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+          },
+          'google_translate_element'
+        )
+      }
+
+      // Función para mostrar la alerta al cargar la página
+      window.onload = function () {
+        const infoAlert = document.querySelector('.info-alert')
+        infoAlert.classList.remove('hidden') // Muestra la alerta
+      }
+
+      // Función para cerrar la alerta
+      document
+        .getElementById('close-alert')
+        .addEventListener('click', function () {
+          const infoAlert = document.querySelector('.info-alert')
+          infoAlert.classList.add('hidden') // Oculta la alerta
+        })
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <script src="js/paragraphs.js"></script>
     <script src="js/script.js"></script>
   </body>
