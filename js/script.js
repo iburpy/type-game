@@ -17,7 +17,9 @@ const textDisplay = document.querySelector('.typing-text p'),
   finalCpmDisplay = document.querySelector('#final-cpm'),
   closeAlertButton = document.querySelector('#close-alert'),
   completionDisplay = document.querySelector('#completion'),
-  themeToggle = document.querySelector('#theme-toggle')
+  themeToggle = document.querySelector('#theme-toggle'),
+  draggable = document.querySelector('.draggable'),
+  wrapper = document.querySelector('.wrapper')
 
 let i = 0,
   mistakes = 0,
@@ -29,10 +31,37 @@ let i = 0,
   isTyping = false,
   score = 0,
   maxScore = 0,
-  completionPercentage = 0
+  completionPercentage = 0,
+  initialAlertX = 0,
+  initialAlertY = 0,
+  isDraggingAlert = false
 
-const keySound = new Audio('/sfx/typewriter-single-key.mp3'),
-  timeUpSound = new Audio('/sfx/typewriter-bell.mp3')
+const keySound = new Audio('/assets/typewriter-single-key.mp3'),
+  timeUpSound = new Audio('/assets/typewriter-bell.mp3')
+
+draggable.addEventListener('mousedown', (event) => {
+  isDraggingAlert = true
+  event.preventDefault()
+  initialAlertX = event.clientX - draggable.offsetLeft
+  initialAlertY = event.clientY - draggable.offsetTop
+  document.addEventListener('mousemove', dragAlert)
+  document.addEventListener('mouseup', stopDragAlert)
+})
+
+const dragAlert = (event) => {
+  if (isDraggingAlert) {
+    const newX = event.clientX - initialAlertX
+    const newY = event.clientY - initialAlertY
+    draggable.style.left = `${newX}px`
+    draggable.style.top = `${newY}px`
+  }
+}
+
+const stopDragAlert = () => {
+  isDraggingAlert = false
+  document.removeEventListener('mousemove', dragAlert)
+  document.removeEventListener('mouseup', stopDragAlert)
+}
 
 const setInputState = (isDisabled) => {
   input.disabled = isDisabled
@@ -45,7 +74,7 @@ const setResetState = (isDisabled) => {
 }
 
 const updateScore = (isCorrect) => {
-  score = isCorrect ? score + 1 : score - 1
+  score = isCorrect ? score + 1 : Math.max(0, score - 1)
   scoreDisplay.innerText = `${score}/${maxScore}`
 }
 
@@ -213,10 +242,21 @@ timeDropdown.addEventListener('change', () => {
   setResetState(false)
 })
 
+const handleEsc = (event) => {
+  if (event.key === 'Escape') {
+    alertCard.classList.add('hidden')
+    document.querySelector('.result-details').classList.remove('hidden')
+    resetGame()
+  }
+}
+
+document.addEventListener('keydown', handleEsc)
+
 closeAlertButton.addEventListener('click', () => {
   alertCard.classList.add('hidden')
   document.querySelector('.result-details').classList.remove('hidden')
   resetGame()
+  document.removeEventListener('keydown', handleEsc)
 })
 
 const toggleMode = () => {
