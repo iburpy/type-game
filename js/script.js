@@ -19,7 +19,9 @@ const textDisplay = document.querySelector('.typing-text p'),
   completionDisplay = document.querySelector('#completion'),
   themeToggle = document.querySelector('#theme-toggle'),
   draggable = document.querySelector('.draggable'),
-  wrapper = document.querySelector('.wrapper')
+  wrapper = document.querySelector('.wrapper'),
+  infoAlert = document.querySelector('.info-alert'),
+  closeInfoAlertButton = document.getElementById('close-info-alert')
 
 let i = 0,
   mistakes = 0,
@@ -209,7 +211,7 @@ const resetGame = () => {
   mistakes = 0
   successes = 0
   accuracy = 0
-  timeLeft = timeMax // Keep the selected time
+  timeLeft = timeMax
   timeDisplay.innerText = timeLeft
   mistakeCount.innerText = mistakes
   accuracyDisplay.innerText = `${accuracy}%`
@@ -247,6 +249,7 @@ const handleEsc = (event) => {
   if (event.key === 'Escape') {
     alertCard.classList.add('hidden')
     document.querySelector('.result-details').classList.remove('hidden')
+    timeDropdown.value = ''
     resetGame()
   }
 }
@@ -259,6 +262,18 @@ closeAlertButton.addEventListener('click', () => {
   resetGame()
   setInputDisabled(false)
   document.removeEventListener('keydown', handleEsc)
+})
+
+infoAlert.classList.remove('hidden')
+
+// Close the info alert
+closeInfoAlertButton.addEventListener('click', () => {
+  infoAlert.classList.add('hidden')
+})
+
+// Close the info alert
+closeInfoAlertButton.addEventListener('click', () => {
+  infoAlert.classList.add('hidden')
 })
 
 const toggleMode = () => {
