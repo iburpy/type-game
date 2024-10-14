@@ -7,7 +7,7 @@ const textDisplay = document.querySelector('.typing-text p'),
   cpmDisplay = document.querySelector('.cpm span'),
   timeDropdown = document.querySelector('.top-controls .time-selector'),
   options = timeDropdown.querySelectorAll('option'),
-  reset = document.querySelector('.content button'),
+  tryAgain = document.querySelector('.content button'),
   scoreDisplay = document.querySelector('.score-container #score'),
   alertCard = document.querySelector('.alert-card'),
   finalScoreDisplay = document.querySelector('#final-score'),
@@ -63,14 +63,14 @@ const stopDragAlert = () => {
   document.removeEventListener('mouseup', stopDragAlert)
 }
 
-const setInputState = (isDisabled) => {
+const setInputDisabled = (isDisabled) => {
   input.disabled = isDisabled
   input.style.cursor = isDisabled ? 'not-allowed' : 'auto'
 }
 
-const setResetState = (isDisabled) => {
-  reset.disabled = isDisabled
-  reset.style.cursor = isDisabled ? 'not-allowed' : 'pointer'
+const setTryAgain = (isDisabled) => {
+  tryAgain.disabled = isDisabled
+  tryAgain.style.cursor = isDisabled ? 'not-allowed' : 'pointer'
 }
 
 const updateScore = (isCorrect) => {
@@ -97,8 +97,8 @@ const handleTyping = () => {
 
   if (!isTyping) {
     timer = setInterval(updateTimer, 1000)
-    setInputState(true)
-    setResetState(true)
+    setInputDisabled(true)
+    setTryAgain(true)
     isTyping = true
   }
 
@@ -178,8 +178,8 @@ const showResults = () => {
 
 const handleEnd = () => {
   clearInterval(timer)
-  setInputState(true)
-  setResetState(true)
+  setInputDisabled(true)
+  setTryAgain(true)
   input.removeEventListener('input', handleTyping)
   timeUpSound.play()
   showResults()
@@ -209,7 +209,7 @@ const resetGame = () => {
   mistakes = 0
   successes = 0
   accuracy = 0
-  timeLeft = timeMax
+  timeLeft = timeMax // Keep the selected time
   timeDisplay.innerText = timeLeft
   mistakeCount.innerText = mistakes
   accuracyDisplay.innerText = `${accuracy}%`
@@ -220,15 +220,16 @@ const resetGame = () => {
   score = 0
   scoreDisplay.innerText = `${score}/${maxScore}`
   input.value = ''
-  setInputState(true)
-  setResetState(true)
+  setInputDisabled(true)
+  setTryAgain(true)
   timeDropdown.style.display = 'block'
-  options.selectedIndex = 0
+  timeDropdown.value = 0
   document.querySelector('.time').style.display = 'none'
   isTyping = false
-  input.addEventListener('input', handleTyping)
+  input.removeEventListener('input', handleTyping)
   completionPercentage = 0
   completionDisplay.innerText = `${completionPercentage}%`
+  input.value = ''
 }
 
 timeDropdown.addEventListener('change', () => {
@@ -238,8 +239,8 @@ timeDropdown.addEventListener('change', () => {
 
   timeDropdown.style.display = 'none'
   document.querySelector('.time').style.display = 'block'
-  setInputState(false)
-  setResetState(false)
+  setInputDisabled(false)
+  setTryAgain(false)
 })
 
 const handleEsc = (event) => {
@@ -256,6 +257,7 @@ closeAlertButton.addEventListener('click', () => {
   alertCard.classList.add('hidden')
   document.querySelector('.result-details').classList.remove('hidden')
   resetGame()
+  setInputDisabled(false)
   document.removeEventListener('keydown', handleEsc)
 })
 
@@ -281,8 +283,10 @@ const toggleMode = () => {
   })
 }
 
+if (input.disabled) setTryAgain(false)
+
 randomParagraph()
 input.addEventListener('input', handleTyping)
 input.addEventListener('focus', startTimer)
-reset.addEventListener('click', resetGame)
+tryAgain.addEventListener('click', resetGame)
 themeToggle.addEventListener('click', toggleMode)
