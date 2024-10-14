@@ -14,6 +14,10 @@
   box-sizing: border-box;
 }
 
+h2 {
+  font-family: 'Kirsty Regular';
+}
+
 .alert-content h2 {
   margin-bottom: 20px;
   font-family: 'Kirsty Regular';
@@ -307,8 +311,10 @@ button:disabled {
 
 .alert-content {
   background: #bc0517 url('./assets/bg.jpg');
+  margin-left: 20px;
   padding: 20px;
   border-radius: 10px;
+  border: 0.5px solid #121212;
   text-align: center;
   width: 300px;
 }
@@ -528,6 +534,7 @@ body.dark .alert-content {
     center;
   background-size: cover;
   color: #e0e0e0;
+  border: 0.5px solid #e0e0e0;
 }
 
 body.dark .alert-content button {
